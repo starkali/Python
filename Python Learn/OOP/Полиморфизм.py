@@ -15,21 +15,7 @@ class Car:
         
     def change_color(self, new_color):
         self.color = new_color
-        
+
 class Truck(Car):
-    wheels_number = 6
     def __init__(self, name, color, year, is_crashed):
         Car.__init__(self, name, color, year, is_crashed)
-        print('Truck is created')
-    def drive(self, city):
-        print('Truck ' + self.name + ' is driving to ' + city)
-        
-    def load_cargo(self, weight):
-        print('The cargo is loaded. Weight is ' + str(weight) + ' kg.')
-        
-man_truck = Truck('Man', 'White', 2015, False)
-man_truck.drive('New York')
-print(man_truck.wheels_number)
-man_truck.load_cargo(2000)
-
-# Polymorphism
