@@ -55,3 +55,18 @@ class Dog:
     def speak(self):
         print(self.name + ' is saying woof')
 
+class Cat:
+    def __int__(self, name):
+        self.name = name
+
+    def speak(self):
+        print(self.name + ' is saying meow')
+
+
+spike = Dog('Spike')
+tom = Cat('Tom')
+
+pet_list = [spike, tom]
+
+for pet in pet_list:
+    pet.speak()
