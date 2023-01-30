@@ -48,3 +48,10 @@ man_truck.load_cargo(2000)
 
 # Polymorphism
 
+class Dog:
+    def __int__(self, name):
+        self.name = name
+
+    def speak(self):
+        print(self.name + ' is saying woof')
+
