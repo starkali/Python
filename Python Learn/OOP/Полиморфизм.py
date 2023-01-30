@@ -44,3 +44,7 @@ print(man_truck.color)
 man_truck.change_color('Red')
 print(man_truck.color)
 man_truck.load_cargo(2000)
+
+
+# Polymorphism
+
