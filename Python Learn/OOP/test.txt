@@ -1,0 +1,76 @@
+WITH NIGA AS
+ (
+  SELECT C_1,
+          MAX(IDDD) IDN,
+          PANN,
+          PANNNN,
+          C_11 QALIQ,
+          TO_NUMBER(LAST_VALUE(C_11)
+                    OVER(PARTITION BY(C_1) ORDER BY C_1 ROWS BETWEEN CURRENT
+                         ROW AND UNBOUNDED FOLLOWING)) AS HighHH
+    FROM (SELECT B10.C_NAME,
+                  T.PAN PANN,
+                  CASE
+                    WHEN  T.PAN IS NOT NULL THEN
+                     T.PAN
+                    WHEN T.PAN IS NULL THEN
+                     'HELO'
+                  END PANNNN,
+                  b7.C_MAIN_V_ID C_MAIN_V_ID,
+                  A1_1.ID IDDD,
+                  TRUNC(A1_1.C_DATE) C_1,
+
+                  A1_1.C_START_SUM +
+                  Decode(A1_1.C_DT, '1', -A1_1.C_SUMMA, A1_1.C_SUMMA) C_11,
+
+                  DENSE_RANK() OVER(PARTITION BY TRUNC(A1_1.C_DATE) ORDER BY A1_1.C_DATE DESC) AS firstrow
+           --COUNT (distinct b7.c_client_v) CNT
+
+             FROM Z#CLIENT b10,
+                  Z#BRANCH      b9,
+                  Z#DEPART      b8,
+                  Z#AC_FIN      b7,
+                  Z#DEPN        b6,
+                  Z#IP_PRODUCTS b5,
+                  Z#PRODUCT     b4,
+                  Z#IP_ACCOUNTS b3,
+                  Z#IP_CARDS    b2,
+                  Z#RECORDS     A1_1,
+                  dual          s,
+                  Z#VZ_CARDS    b1,
+                  test_kn_1     t
+            WHERE b1.id = b2.id
+              and A1_1.C_ACC_CORR = b7.ID(+)
+              AND b2.C_IP_ACCOUNTS_REF = b3.id
+              AND b1.id = b4.id
+              AND b2.C_IP_PRODUCTS_REF = b5.id(+)
+              AND b3.C_PROD_REF = b6.id(+)
+              AND b6.C_ACCOUNT = b7.id(+)
+              AND b4.C_DEPART = b8.id(+)
+              AND b8.C_VTA_FILIAL_V = b9.id(+)
+              AND b2.C_CLIENT = b10.id(+)
+              and t.pan(+) = b2.c_pan
+
+              AND C_MAIN_V_ID IN ('AZ13VTBA04102001324774RUB001')
+           --and c_pan in ('4654910007721856'_
+           )
+   WHERE FIRSTROW = 1
+
+   GROUP BY C_1, PANN, PANNNN, C_11)
+
+SELECT DD.*,
+       NNN.*,
+       CASE
+         WHEN TO_NUMBER(NNN.QALIQ) IS NULL THEN
+          TO_NUMBER(NNN.HighHH)
+       /*  TO_NUMBER(LAST_VALUE(NNN.QALIQ)  OVER(PARTITION BY (C_1)
+                     ORDER BY  C_1
+       ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING) )*/
+         ELSE
+          NNN.QALIQ
+       END
+  FROM (SELECT TO_DATE('31.12.2021', 'dd.mm.yyyy') + level dt
+          FROM DUAL
+        CONNECT BY level < 366) DD
+  LEFT JOIN NIGA NNN
+    ON DD.DT = TRUNC(C_1)
