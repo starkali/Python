@@ -48,14 +48,22 @@
 
 # Polymorphism
 
-class Dog:
+
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        raise NotImplementedError('Class successor must implement this method')
+
+class Dog(Animal):
     def __init__(self, name):
         self.name = name
 
     def speak(self):
         print(self.name + ' is saying woof')
 
-class Cat:
+class Cat(Animal):
     def __init__(self, name):
         self.name = name
 
@@ -63,10 +71,37 @@ class Cat:
         print(self.name + ' is saying meow')
 
 
+class Mouse(Animal):
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        print(self.name + ' is saying pee-pee-pee')
+
+
+class Fish(Animal):
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        print(self.name + ' is saying nothing')
+
+
 spike = Dog('Spike')
 tom = Cat('Tom')
+jerry = Mouse('Jerry')
 
-pet_list = [spike, tom]
+pet_list = [spike, tom, jerry]
 
 for pet in pet_list:
     pet.speak()
+
+def pet_voice(pet):
+    pet.speak()
+
+pet_voice(spike)
+pet_voice(tom)
+pet_voice(jerry)
+
+freddy = Fish('Freddy')
+pet_voice(freddy)
