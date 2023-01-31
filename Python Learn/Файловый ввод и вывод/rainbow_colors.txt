@@ -1,0 +1,11 @@
+red
+orange
+yellow
+green
+blue
+indigo
+violet
+dark green
+dark blue
+dark green
+dark blue
