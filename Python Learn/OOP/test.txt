@@ -1,3 +1,4 @@
+
 WITH NIGA AS
  (
   SELECT C_1,
