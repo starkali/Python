@@ -1,3 +1,3 @@
-import termcolor
+import art
 
-print(termcolor.colored('Hello termcolor', 'red'))
+print(art.text2art("Ali", font='block'))
