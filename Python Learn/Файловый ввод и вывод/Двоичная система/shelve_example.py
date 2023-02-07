@@ -59,7 +59,6 @@ cars.close()
     #     country = cars.get(key, "We don't have a " + key)
     #     print(country)
 
-
     # while True:
     #     key = input('Please enter a car name: ')
     #     if key == 'quit':
