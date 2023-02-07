@@ -34,7 +34,7 @@ def product(range_value):
 
 print(sum_with_list())
 print(sum_with_gen())
-print(product(100000))
+print(product(100))
 
 
 
