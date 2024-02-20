@@ -1,4 +1,4 @@
-# Python Programming For Beginners
+# Python Programming
 
 Welcome to this book on **"Learning Python In 100 Steps"**. 
 
